@@ -235,6 +235,8 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   transform-origin: center;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   will-change: transform, opacity;
+  max-width: 100%;
+  height: auto;
 }
 
 .hero-visual:hover img {
@@ -290,6 +292,7 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   object-fit: cover;
   border-right: 1px solid var(--line);
   transition: transform 0.45s ease;
+  max-width: 100%;
 }
 
 .feature-card:hover img {
@@ -424,3 +427,415 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   .hero-tagline { font-size: 0.98rem; }
 }
 
+/* ========================================
+   MOBILE RESPONSIVE FIXES - 768px and below
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Container and spacing */
+  .container {
+    width: calc(100% - 1.5rem);
+  }
+
+  .section, .hero {
+    padding: 3rem 0;
+  }
+
+  /* Typography adjustments */
+  h1 {
+    font-size: clamp(1.8rem, 7vw, 2.8rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p, .hero-tagline {
+    font-size: 0.95rem;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Hero section - stack vertically */
+  .hero {
+    min-height: auto;
+    padding: 2.5rem 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: auto;
+    align-items: stretch;
+  }
+
+  .hero-copy {
+    order: 1;
+  }
+
+  .hero-visual {
+    order: 2;
+    margin-top: 1rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-role {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-tagline {
+    max-width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Buttons - ensure they fit */
+  .btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    min-width: auto;
+    white-space: nowrap;
+  }
+
+  .hero-actions {
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+
+  /* Grids - convert to single column */
+  .three-up,
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feature-grid {
+    gap: 1rem;
+  }
+
+  .feature-card {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card img {
+    min-height: 200px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    order: 0;
+  }
+
+  .feature-card > div {
+    padding: 1rem;
+    order: 0;
+  }
+
+  /* Cards padding */
+  .info-card,
+  .feature-card,
+  .testimonial-card,
+  .contact-panel {
+    border-radius: 16px;
+    padding: 1rem;
+  }
+
+  .testimonial-card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .quote {
+    font-size: 0.95rem;
+  }
+
+  .author {
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+  }
+
+  /* Contact panel */
+  .contact-panel {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .contact-list {
+    gap: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  /* Images - scale properly */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .hero-visual img {
+    border-radius: 20px;
+  }
+
+  /* Navigation */
+  .nav-links {
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  /* Hero visual - reduce shadow */
+  .hero-visual::before {
+    inset: -10% -8%;
+    filter: blur(12px);
+  }
+
+  /* Section heading */
+  .section-heading {
+    margin-bottom: 1rem;
+  }
+}
+
+/* ========================================
+   MOBILE RESPONSIVE FIXES - 480px and below
+   ======================================== */
+
+@media (max-width: 480px) {
+  /* Container and spacing */
+  .container {
+    width: calc(100% - 1rem);
+  }
+
+  .section, .hero {
+    padding: 2rem 0;
+  }
+
+  /* Typography - aggressive reduction */
+  h1 {
+    font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  p, .hero-tagline, .quote {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Hero section */
+  .hero {
+    min-height: auto;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    min-height: auto;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.4rem, 7vw, 2rem) !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-role {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-tagline {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  /* Buttons - optimize for small screens */
+  .btn {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    flex: 1 1 auto;
+  }
+
+  .hero-actions {
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Grids - single column */
+  .three-up,
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .feature-grid {
+    gap: 0.75rem;
+  }
+
+  .feature-card {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+
+  .feature-card img {
+    min-height: 180px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .feature-card > div {
+    padding: 0.85rem;
+  }
+
+  .reverse-layout img {
+    border-left: none;
+    border-bottom: 1px solid var(--line);
+    order: 0;
+  }
+
+  .reverse-layout > div {
+    order: 0;
+  }
+
+  /* Cards */
+  .info-card,
+  .feature-card,
+  .testimonial-card,
+  .contact-panel {
+    border-radius: 12px;
+    padding: 0.85rem;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+  }
+
+  .testimonial-card {
+    max-width: 100%;
+    padding: 0.85rem;
+  }
+
+  .quote {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .author {
+    font-size: 0.85rem;
+    margin-top: 0.6rem;
+  }
+
+  /* Contact panel */
+  .contact-panel {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0.85rem;
+  }
+
+  .contact-list {
+    gap: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-visual img {
+    border-radius: 16px;
+    border: 1px solid var(--line);
+  }
+
+  /* Hero visual glow */
+  .hero-visual::before {
+    inset: -12% -10%;
+    filter: blur(10px);
+    opacity: 0.1;
+  }
+
+  /* Navigation */
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .brand {
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    padding: 0.25rem 0;
+  }
+
+  /* Section heading */
+  .section-heading {
+    margin-bottom: 0.85rem;
+  }
+
+  /* Footer */
+  .footer-inner {
+    padding: 0.75rem 0 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* Reduce animation complexity on mobile */
+  .hero-visual {
+    animation: none;
+  }
+
+  .hero-visual img {
+    animation: none;
+  }
+
+  .hero-copy h1,
+  .hero-copy .eyebrow,
+  .hero-copy .hero-role,
+  .hero-copy .hero-tagline,
+  .hero-copy .hero-actions {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
