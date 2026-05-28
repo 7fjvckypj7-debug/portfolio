@@ -52,7 +52,12 @@ body::after {
   animation-delay: -8s;
 }
 
-img { display: block; width: 100%; }
+img { 
+  display: block; 
+  width: 100%; 
+  height: auto;
+  max-width: 100%;
+}
 
 a { color: inherit; text-decoration: none; position: relative; }
 
@@ -79,7 +84,10 @@ a:focus-visible::after { transform: scaleX(1); }
   margin: 0 auto;
 }
 
-.section, .hero { padding: 4.5rem 0; }
+.section, .hero { 
+  padding: 4.5rem 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 10, 18, 0.4) 100%);
+}
 
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
@@ -237,6 +245,7 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   will-change: transform, opacity;
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 .hero-visual:hover img {
@@ -281,25 +290,55 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 .feature-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
+  align-items: stretch;
   overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  position: relative;
 }
 
 .feature-card img {
   height: 100%;
   min-height: 260px;
   object-fit: cover;
+  object-position: center;
   border-right: 1px solid var(--line);
   transition: transform 0.45s ease;
   max-width: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark overlay on feature card images */
+.feature-card img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(7, 11, 18, 0.4) 0%, rgba(7, 11, 18, 0.2) 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .feature-card:hover img {
   transform: scale(1.04);
 }
 
-.feature-card > div { padding: 1.25rem; }
+.feature-card > div { 
+  padding: 1.25rem; 
+  position: relative;
+  z-index: 3;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.feature-card > div h3,
+.feature-card > div p {
+  position: relative;
+  z-index: 4;
+}
 
 .reverse-layout img { border-right: none; border-left: 1px solid var(--line); order: 2; }
 .reverse-layout > div { order: 1; }
@@ -311,12 +350,22 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   max-width: 900px;
 }
 
-.quote { font-size: 1.05rem; }
+.quote { 
+  font-size: 1.05rem;
+  color: var(--text);
+  font-weight: 500;
+}
 
 .author {
   color: var(--text);
   margin-top: 1rem;
   font-weight: 600;
+}
+
+.role {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
 }
 
 .contact-panel {
@@ -429,42 +478,52 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 
 /* ========================================
    MOBILE RESPONSIVE FIXES - 768px and below
+   Enhanced for contrast, overlays, and readability
    ======================================== */
 
 @media (max-width: 768px) {
-  /* Container and spacing */
+  /* Container and spacing - ensure proper dark background */
   .container {
     width: calc(100% - 1.5rem);
   }
 
   .section, .hero {
     padding: 3rem 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(6, 10, 18, 0.5) 100%);
   }
 
-  /* Typography adjustments */
+  /* Typography adjustments - WCAG AA compliant */
   h1 {
     font-size: clamp(1.8rem, 7vw, 2.8rem) !important;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   h2 {
     font-size: clamp(1.5rem, 5vw, 2.2rem);
+    color: #ffffff;
   }
 
   h3 {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    color: #ffffff;
+    font-weight: 600;
   }
 
   p, .hero-tagline {
     font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d4d8e3;
   }
 
   .eyebrow {
     font-size: 0.75rem;
     margin-bottom: 0.5rem;
+    color: #d2b77f;
   }
 
-  /* Hero section - stack vertically */
+  /* Hero section - stack vertically with proper spacing */
   .hero {
     min-height: auto;
     padding: 2.5rem 0;
@@ -472,7 +531,7 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
     min-height: auto;
     align-items: stretch;
   }
@@ -490,26 +549,42 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
     font-size: clamp(2rem, 8vw, 2.8rem) !important;
     line-height: 1.1;
     margin-bottom: 0.75rem;
+    color: #ffffff;
   }
 
   .hero-role {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    color: #d2b77f;
   }
 
   .hero-tagline {
     max-width: 100%;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: #b8bcc8;
   }
 
-  /* Buttons - ensure they fit */
+  /* Buttons - ensure they fit and are readable */
   .btn {
     padding: 0.8rem 1rem;
     font-size: 0.9rem;
     border-radius: 8px;
     min-width: auto;
     white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #d2b77f, #ead8b1);
+    color: #111827;
+    font-weight: 700;
+  }
+
+  .btn-secondary {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(210, 183, 127, 0.3);
   }
 
   .hero-actions {
@@ -528,65 +603,118 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
     gap: 1rem;
   }
 
+  /* Feature cards - proper stacking with overlays */
   .feature-card {
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 
   .feature-card img {
-    min-height: 200px;
+    min-height: 220px;
     border: none;
     border-bottom: 1px solid var(--line);
     order: 0;
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: cover;
   }
 
   .feature-card > div {
-    padding: 1rem;
+    padding: 1.25rem;
     order: 0;
+    background: rgba(12, 17, 28, 0.95);
   }
 
-  /* Cards padding */
+  .feature-card > div h3 {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .feature-card > div p {
+    color: #b8bcc8;
+    line-height: 1.6;
+  }
+
+  /* Cards - maintain dark styling */
   .info-card,
   .feature-card,
   .testimonial-card,
   .contact-panel {
     border-radius: 16px;
-    padding: 1rem;
+    padding: 1.25rem;
+    background: rgba(12, 17, 28, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .info-card h3 {
+    color: #ffffff;
+  }
+
+  .info-card p {
+    color: #b8bcc8;
   }
 
   .testimonial-card {
     max-width: 100%;
-    padding: 1rem;
+    padding: 1.25rem;
   }
 
   .quote {
     font-size: 0.95rem;
+    color: #ffffff;
+    font-weight: 500;
   }
 
   .author {
     font-size: 0.9rem;
     margin-top: 0.75rem;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .role {
+    font-size: 0.85rem;
+    color: #d2b77f;
+    margin-top: 0.25rem;
   }
 
   /* Contact panel */
   .contact-panel {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
-    padding: 1rem;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .contact-panel h2 {
+    color: #ffffff;
+  }
+
+  .contact-copy {
+    color: #b8bcc8;
   }
 
   .contact-list {
-    gap: 0.3rem;
+    gap: 0.5rem;
     font-size: 0.9rem;
+    color: #b8bcc8;
   }
 
-  /* Images - scale properly */
+  .contact-list a { 
+    color: #d2b77f;
+    font-weight: 500;
+  }
+
+  /* Images - scale properly with constraints */
   img {
     max-width: 100%;
     height: auto;
+    display: block;
   }
 
   .hero-visual img {
     border-radius: 20px;
+    border: 1px solid var(--line);
   }
 
   /* Navigation */
@@ -595,8 +723,13 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
     font-size: 0.9rem;
   }
 
+  .nav-links a {
+    color: #b8bcc8;
+  }
+
   .brand {
     font-size: 1rem;
+    color: #ffffff;
   }
 
   /* Hero visual - reduce shadow */
@@ -607,12 +740,17 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 
   /* Section heading */
   .section-heading {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-heading p {
+    color: #d2b77f;
   }
 }
 
 /* ========================================
    MOBILE RESPONSIVE FIXES - 480px and below
+   Ultra-compact with maximum readability
    ======================================== */
 
 @media (max-width: 480px) {
@@ -623,36 +761,45 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 
   .section, .hero {
     padding: 2rem 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(6, 10, 18, 0.6) 100%);
   }
 
-  /* Typography - aggressive reduction */
+  /* Typography - aggressive reduction with strong contrast */
   h1 {
     font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
     line-height: 1.2;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   h2 {
     font-size: clamp(1.2rem, 5vw, 1.8rem);
     margin-bottom: 1rem;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   h3 {
     font-size: 0.95rem;
     margin-bottom: 0.4rem;
+    color: #ffffff;
+    font-weight: 600;
   }
 
   p, .hero-tagline, .quote {
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: #d4d8e3;
   }
 
   .eyebrow {
     font-size: 0.7rem;
     letter-spacing: 0.15em;
     margin-bottom: 0.4rem;
+    color: #d2b77f;
   }
 
-  /* Hero section */
+  /* Hero section - optimized for small screens */
   .hero {
     min-height: auto;
     padding: 1.5rem 0;
@@ -661,31 +808,48 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
     min-height: auto;
   }
 
   .hero-copy h1 {
     font-size: clamp(1.4rem, 7vw, 2rem) !important;
     margin-bottom: 0.5rem;
+    color: #ffffff;
   }
 
   .hero-role {
     font-size: 0.95rem;
     margin-bottom: 0.4rem;
+    color: #d2b77f;
   }
 
   .hero-tagline {
     max-width: 100%;
     font-size: 0.9rem;
+    line-height: 1.6;
+    color: #b8bcc8;
   }
 
-  /* Buttons - optimize for small screens */
+  /* Buttons - mobile-optimized */
   .btn {
-    padding: 0.7rem 0.9rem;
-    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
     border-radius: 6px;
     flex: 1 1 auto;
+    font-weight: 600;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #d2b77f, #ead8b1);
+    color: #111827;
+    font-weight: 700;
+  }
+
+  .btn-secondary {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(210, 183, 127, 0.3);
   }
 
   .hero-actions {
@@ -705,19 +869,39 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
     gap: 0.75rem;
   }
 
+  /* Feature cards - mobile-optimized with strong overlays */
   .feature-card {
     grid-template-columns: 1fr;
     border-radius: 12px;
+    overflow: hidden;
   }
 
   .feature-card img {
-    min-height: 180px;
+    min-height: 200px;
+    max-height: 260px;
     border: none;
     border-bottom: 1px solid var(--line);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 
   .feature-card > div {
-    padding: 0.85rem;
+    padding: 1.1rem;
+    background: rgba(7, 11, 18, 0.98);
+  }
+
+  .feature-card > div h3 {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .feature-card > div p {
+    color: #d4d8e3;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .reverse-layout img {
@@ -730,44 +914,83 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
     order: 0;
   }
 
-  /* Cards */
+  /* Cards - ultra dark background for mobile */
   .info-card,
   .feature-card,
   .testimonial-card,
   .contact-panel {
     border-radius: 12px;
-    padding: 0.85rem;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    padding: 1.1rem;
+    background: rgba(7, 11, 18, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .info-card h3 {
+    color: #ffffff;
+    font-size: 0.95rem;
+  }
+
+  .info-card p {
+    color: #d4d8e3;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .testimonial-card {
     max-width: 100%;
-    padding: 0.85rem;
+    padding: 1.1rem;
   }
 
   .quote {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ffffff;
+    font-weight: 500;
   }
 
   .author {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-top: 0.6rem;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .role {
+    font-size: 0.8rem;
+    color: #d2b77f;
+    margin-top: 0.2rem;
   }
 
   /* Contact panel */
   .contact-panel {
     grid-template-columns: 1fr;
-    gap: 0.6rem;
-    padding: 0.85rem;
+    gap: 1rem;
+    padding: 1.1rem;
+  }
+
+  .contact-panel h2 {
+    color: #ffffff;
+    font-size: 1.3rem;
+  }
+
+  .contact-copy {
+    color: #d4d8e3;
+    font-size: 0.9rem;
   }
 
   .contact-list {
-    gap: 0.25rem;
-    font-size: 0.85rem;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #d4d8e3;
   }
 
-  /* Images */
+  .contact-list a { 
+    color: #d2b77f;
+    font-weight: 500;
+  }
+
+  /* Images - prevent overflow */
   img {
     max-width: 100%;
     height: auto;
@@ -779,14 +1002,14 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
     border: 1px solid var(--line);
   }
 
-  /* Hero visual glow */
+  /* Hero visual glow - optimized for mobile */
   .hero-visual::before {
     inset: -12% -10%;
     filter: blur(10px);
-    opacity: 0.1;
+    opacity: 0.08;
   }
 
-  /* Navigation */
+  /* Navigation - stack vertically */
   .topbar {
     flex-direction: column;
     align-items: flex-start;
@@ -796,6 +1019,8 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
 
   .brand {
     font-size: 0.95rem;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   .nav-links {
@@ -806,18 +1031,38 @@ h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   }
 
   .nav-links a {
+    color: #d4d8e3;
     padding: 0.25rem 0;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: #ffffff;
   }
 
   /* Section heading */
   .section-heading {
-    margin-bottom: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-heading .eyebrow {
+    color: #d2b77f;
+  }
+
+  .section-heading h2 {
+    color: #ffffff;
   }
 
   /* Footer */
+  .footer {
+    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, transparent 0%, rgba(6, 10, 18, 0.5) 100%);
+  }
+
   .footer-inner {
     padding: 0.75rem 0 1.5rem;
     font-size: 0.85rem;
+    color: #b8bcc8;
   }
 
   /* Reduce animation complexity on mobile */
